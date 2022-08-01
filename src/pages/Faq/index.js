@@ -31,7 +31,7 @@ function Howtobuy() {
                 borderStyle: "solid",
                 borderWidth: "8px",
                 borderImage:
-                  "linear-gradient(to right, #40F8A7, transparent 75%)",
+                  "linear-gradient(to right, #c6660d, transparent 95%)",
                 borderImageSlice: 1,
                 borderLeft: "double 0px transparent",
                 borderRight: "double 0px transparent",
@@ -76,7 +76,7 @@ function Howtobuy() {
                 borderStyle: "solid",
                 borderWidth: "8px",
                 borderImage:
-                  "linear-gradient(to right, #40F8A7, transparent 75%)",
+                  "linear-gradient(to right, #c6660d, transparent 95%)",
                 borderImageSlice: 1,
                 borderLeft: "double 0px transparent",
                 borderRight: "double 0px transparent",
@@ -121,7 +121,7 @@ function Howtobuy() {
                 borderStyle: "solid",
                 borderWidth: "8px",
                 borderImage:
-                  "linear-gradient(to right, #40F8A7, transparent 75%)",
+                  "linear-gradient(to right, #c6660d, transparent 95%)",
                 borderImageSlice: 1,
                 borderLeft: "double 0px transparent",
                 borderRight: "double 0px transparent",
@@ -165,7 +165,7 @@ function Howtobuy() {
                 borderStyle: "solid",
                 borderWidth: "8px",
                 borderImage:
-                  "linear-gradient(to right, #40F8A7, transparent 75%)",
+                  "linear-gradient(to right, #c6660d, transparent 95%)",
                 borderImageSlice: 1,
                 borderLeft: "double 0px transparent",
                 borderRight: "double 0px transparent",
@@ -194,7 +194,7 @@ function Howtobuy() {
                 borderStyle: "solid",
                 borderWidth: "8px",
                 borderImage:
-                  "linear-gradient(to right, #40F8A7, transparent 75%)",
+                  "linear-gradient(to right, #c6660d, transparent 95%)",
                 borderImageSlice: 1,
                 borderLeft: "double 0px transparent",
                 borderRight: "double 0px transparent",
@@ -224,7 +224,7 @@ function Howtobuy() {
                 borderStyle: "solid",
                 borderWidth: "8px",
                 borderImage:
-                  "linear-gradient(to right, #40F8A7, transparent 75%)",
+                  "linear-gradient(to right, #c6660d, transparent 95%)",
                 borderImageSlice: 1,
                 borderLeft: "double 0px transparent",
                 borderRight: "double 0px transparent",
@@ -254,7 +254,7 @@ function Howtobuy() {
                 borderStyle: "solid",
                 borderWidth: "8px",
                 borderImage:
-                  "linear-gradient(to right, #40F8A7, transparent 75%)",
+                  "linear-gradient(to right, #c6660d, transparent 95%)",
                 borderImageSlice: 1,
                 borderLeft: "double 0px transparent",
                 borderRight: "double 0px transparent",
@@ -284,7 +284,7 @@ function Howtobuy() {
                 borderStyle: "solid",
                 borderWidth: "8px",
                 borderImage:
-                  "linear-gradient(to right, #40F8A7, transparent 75%)",
+                  "linear-gradient(to right, #c6660d, transparent 95%)",
                 borderImageSlice: 1,
                 borderLeft: "double 0px transparent",
                 borderRight: "double 0px transparent",

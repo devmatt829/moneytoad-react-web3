@@ -97,7 +97,6 @@ export function ElevateAppBar(props) {
   const styles = {
     button: {
       userSelect: "none",
-      width: "200px",
       color: "#e58f0e",
       fontSize: "16px",
       padding: "5px 30px",
@@ -128,7 +127,7 @@ export function ElevateAppBar(props) {
             
          
             <Box px = {{md:2,xs:1}} display="flex">
-                <a href="https://bscscan.com/address/0x6586f23b212017042463e33f869227ee734a7541" style={{marginRight:"15px",marginLeft:'15px'}}>
+                <a href="https://bscscan.com/address/0xd2d28013E97161cb58bfD36643cC93a3E137ec37" style={{marginRight:"15px",marginLeft:'15px'}}>
                   <img
                     src="/image/contract.png"
                     alt="boxa staking"
@@ -142,14 +141,23 @@ export function ElevateAppBar(props) {
                     width="27px"
                   />
                 </a>
-                <a href="https://t.me/"  style={{marginRight:"15px",marginLeft:'15px'}}>
+                <a href="https://t.me/MoneyToadMiner"  style={{marginRight:"15px",marginLeft:'15px'}}>
                   <img
                     src="/image/telegram.png"
                     alt="boxa staking"
                     width="27px"
                   />
+                  <img src="/image/american-flag.png" width="15px" height="10px"/>
                 </a>
-              </Box>
+                <a href="https://t.me/MoneyToadMinerCN"  style={{marginRight:"15px",marginLeft:'15px'}}>
+                  <img
+                    src="/image/telegram.png"
+                    alt="boxa staking"
+                    width="27px"
+                  />
+                  <img src="image/kindpng_7716077.png" alt="china_flag" width="15px" height="10px"/>
+                </a>
+             </Box>
             
 
           </Toolbar>

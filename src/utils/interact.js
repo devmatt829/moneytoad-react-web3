@@ -2,11 +2,11 @@
 import Web3 from "web3";
 const web3 = new Web3(window.ethereum);
 const contractABI = require('../contract-abi.json')
-const contractAddress = '0x08B9c33F1cd49e3aC08a4c924cAEbD3Eb55B7889'
+const contractAddress = '0xd2d28013E97161cb58bfD36643cC93a3E137ec37'
 
 export const connectWallet = async () => {
   if (window.ethereum) {
-    const chainId = 97 // 3 for ropsten, 4 for rinkeby, 1 for mainnet
+    const chainId = 56 // 3 for ropsten, 4 for rinkeby, 1 for mainnet
     // switch to chainId
     let account;
     try{
@@ -212,9 +212,11 @@ export const getBallance = async () => {
   try{
     balance = await web3.eth.getBalance(window.ethereum.selectedAddress)
     //console.log(balance)
+    debugger
   } catch(error){
     //console.log(error)
     balance = 0.00000000000000001 ;
+    debugger
   }
 
   try {

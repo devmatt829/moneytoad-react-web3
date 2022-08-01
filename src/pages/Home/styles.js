@@ -15,28 +15,31 @@ const styles = {
       width: '800px',
       maxWidth: '100%',
       margin: '50px auto 0',
-      display: 'flex',
+      display: {md:'flex',xs:'block'},
       justifyContent: 'center',
       alignItems: 'stretch',
       gridGap: '20px',
-      gap: '20px'
+      gap: '20px',
+      
     },
     leftBox:{
       padding:'20px',
       background:'#e58f0e',
       borderRadius:'20px',
-      width: 'calc(50% - 10px)'
+      marginBottom:'30px',
+      width: {md:'36%',xs:'100%'}
     },
     value:{
       fontWeight: '600',
-      fontSize: '22px',
+      fontSize: '4.8vw',
+      fontSize:'24px',
       color: '#feec6c',
     },
     rightBox:{
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'spaceBetween',
-      width: 'calc(50% - 10px)'
+      width: {md:'36%',xs:'100%'}
     },
     dataRow: {
       display: "flex",
@@ -44,7 +47,7 @@ const styles = {
       alignContent: "center",
       margin: "5px 0",
       color: "#49221a",
-      fontSize: "18px",
+      fontSize:'22px',
       lineHeight: "35px"
     },
     antWrapper:{
@@ -64,12 +67,10 @@ const styles = {
       border: 'none',
       color: '#feec6c',
       background: "transparent",
-      fontSize: "16px",
+      fontSize: '24px',
       fontWeight: "600",
       lineHeight: "55px",
       textAlign: "center",
-      width:'275px',
-      paddingLeft: "25px",
       outline:'0',
       "&::-webkit-outer-spin-button, &::-webkit-inner-spin-button": {
         "-webkit-appearance": "none",
@@ -79,7 +80,7 @@ const styles = {
       border: "2px solid #731c00",
       borderRadius: "30px",
       color: "#731c00",
-      fontSize: "16px",
+      fontSize:{md:'18px',xs:'4vw'},
       fontWeight: "600",
       lineHeight: "42px",
       padding: "5px 0",
@@ -112,7 +113,7 @@ const styles = {
       border: "2px solid #731c00",
       color: "#731c00",
       fontWeight: "700",
-      fontSize: "16px",
+      fontSize: '16px',
       padding: "8px 0",
       borderRadius: "30px",
     },

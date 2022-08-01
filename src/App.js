@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import React, { lazy} from "react";
 import { ElevateAppBar } from "./components/AppBar";
+import { HeaderBar } from './components/AppBar'
 import { motion } from "framer-motion";
 import {CounterProvider,TimeCounterProvider} from "./utils/store";
 const Home = lazy(() => import("./pages/Home"));
@@ -67,7 +68,7 @@ function App() {
                     variants={pageVariants}
                     transition={pageTransition}
                   >
-                    <ElevateAppBar />
+                    <HeaderBar />
                     <Layout>
                       <Faq />
                     </Layout>

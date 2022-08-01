@@ -1,25 +1,19 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect,useRef} from "react";
 import { Box, Typography, Grid, Button, Paper, Link,TextField, filledInputClasses } from "@mui/material";
 
-import BACKGROUND_MAIN from "../../assets/image/temple_in_the_rain_by_lamperouge0_ddcgnhy-fullview (1).jpg";
-import SUB_BG_MAIN from "../../assets/image/chinese_temple__by_wannabegansta124_dc938nu-pre (1).jpg"
 import TOAD_BANNER2 from "../../assets/image/Money_Toad_logo.png";
 import TOAD_BANNER1 from "../../assets/image/money_toad.png";
-import WALLET_IMAGE from '../../assets/image/wallet.png'
-import BACKGROUND_GREEN_CURVE from "../../assets/image/chinese_temple__by_wannabegansta124_dc938nu-pre (1).jpg";
+
 import useWindowDimensions from "../../hooks/useDimension";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { NavLink } from "react-router-dom";
+
 import {useCounterStore, useTimeCounterStore} from '../../utils/store';
 import { ToastContainer, toast } from 'react-toastify';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import 'react-toastify/dist/ReactToastify.css';
-import CardMedia from '@mui/material/CardMedia';
-import ConnectButton from '../../components/AppBar/connectButton'
+
+import whitePaper from '../../assets/MoneyToad Whitepaper.pdf'
+import kyc from '../../assets/MoneyToad.jpg'
 import {
   buyToad,
   sellToad,
@@ -31,6 +25,7 @@ import {styles} from './styles.js'
 function Banner() {
   const { width } = useWindowDimensions();
   const [toad, setToad] = useState();
+  const videoEl = useRef(null);
   const [ballance,setBallance] = useState();
   const [rewardBNB,setRewardBNB] = useState();
   const [balanceToad,setBalancedToad] = useState();
@@ -40,8 +35,20 @@ function Banner() {
   const [timeCount, setTimeCount]=useTimeCounterStore();
   let timetracker;
   const [ timeTracking, setTimeTrackingStop] = useState(true)
+  const attemptPlay = () => {
+    videoEl &&
+      videoEl.current &&
+      videoEl.current.play() && videoEl.current.play().catch(error => {
+        window.alert('video can not be autoplayed')
+      });
+  };
+
+  useEffect(() => {
+    attemptPlay();
+  }, []);
+
   const calculateTimeLeft = () => {
-    const difference = +new Date("2022-07-18T06:00:00+03:00") - +new Date() ;
+    const difference = +new Date("2022-08-02T22:00:00+03:00") - +new Date() ;
     let timeLeft = {};
     timeLeft = {
       day: Math.floor(difference / (1000 * 60 * 60 * 24)),
@@ -71,11 +78,11 @@ function Banner() {
         {
           getStatus();
           //notify("Buyed successfully",address);
-          createNotification("Buyed Successfully")
+          //createNotification("Buyed Successfully")
         }
     else{
       //notify("Buyed failed",address);
-      createNotification("Buyed failed")
+      //createNotification("Buyed failed")
     }
       //console.log('status=',status);
   }
@@ -86,12 +93,12 @@ function Banner() {
       {
         getStatus();
         //notify("Compounded successfully",address);
-        createNotification("Claimed successfully")
+        //createNotification("Claimed successfully")
       }
     else{
       //notify("Compound failed",address);
  
-      createNotification("Claim Failed")
+      //createNotification("Claim Failed")
     }
     //console.log('status=',status);
   }
@@ -103,18 +110,18 @@ function Banner() {
         {
           getStatus();
           //notify("Selled successfully",address);
-          createNotification("Selled Successfully")
+          //createNotification("Selled Successfully")
         }
     else{
       //notify("Sell failed",address);
-      createNotification("Sell Failed")
+      //createNotification("Sell Failed")
     }
     //console.log('status=',status);
   }
   async function getStatus(){
     //console.log('gettingbalance')
   const {balance,reward,eggs,contractBalance} = await getBallance();
-  
+  debugger
   setBallance(balance)
   setRewardBNB(reward)
   setBalancedToad(eggs)      
@@ -168,89 +175,88 @@ function Banner() {
           <Grid container display="flex" alignItems="center" justifyContent="center">
             
             <Grid item xs={12} sm={12}>
-            <Box 
-                px={{ md: 10, xs: 5 }}
-                py={5}
-                mt={10}
-                style={{
-                textAlign:'center',
-                alignItems:'center',
-                justifyContent:'center',
-                
-              }}>
-                <Typography
-                     
-                      fontSize={{ md: "54px", xs: "34x" }}
-                      px={2}
-                      py={1}
-                     
-                      color={'#febf33'}
-                    >
-                      🚀 Launching Soon...
-                      <br></br>
-                </Typography>
-                
+              <Box 
+                  px={{ md: 10, xs: 0 }}
+                  py={5}
+                  mt={10}
+                  style={{
+                  textAlign:'center',
+                  alignItems:'center',
+                  justifyContent:'center',
+                  
+                }}>
+                  <Typography
+                      
+                        fontSize={{ md: "54px", xs: "34x" }}
+                        px={2}
+                        py={1}
+                      
+                        color={'#febf33'}
+                      >
+                        🚀 Launching Soon...
+                        <br></br>
+                  </Typography>
+                  
+                      
+                  {timeLeft.hours || timeLeft.minutes || timeLeft.seconds ? (
+                    <Typography
                     
-                {timeLeft.hours || timeLeft.minutes || timeLeft.seconds ? (
-                  <Typography
-                  
-                      fontSize={{ md: "24px", xs: "12x" }}
-                      px={2}
-                      py={1}
-                      color={'#febf33'}
-                      display="inline-flex"
+                        fontSize={{ md: "24px", xs: "12x" }}
+                        px={2}
+                        py={1}
+                        color={'#febf33'}
+                        display="inline-flex"
+                      >
+                      <Box component="div" display="inline" style={{marginRight:'20px'}} >
+                        <Box style={{borderColor:'rgba(255, 27, 27, 0.3)',borderRadius:'6px',borderStyle:'solid'}} padding ={{md:'10px 50px',xs:'5px 10px'}} fontSize={{ md: "36px", xs: "24x" }}>
+                          {timeLeft.day}
+                        </Box>
+                        <br/>
+                        Days
+                      </Box>
+                      <Box component="div" display="inline" style={{marginRight:'20px'}}>
+                        <Box style={{borderColor:'rgba(255, 27, 27, 0.3)',borderRadius:'6px',borderStyle:'solid'}} padding ={{md:'10px 50px',xs:'5px 10px'}} fontSize={{ md: "36px", xs: "24x" }}>
+                          {timeLeft.hours < 10 ? '0' + timeLeft.hours: timeLeft.hours}
+                        </Box>
+                        <br/>
+                        Hours
+                      </Box>
+                      <Box component="div" display="inline" style={{marginRight:'20px'}} >
+                        <Box style={{borderColor:'rgba(255, 27, 27, 0.3)',borderRadius:'6px',borderStyle:'solid'}} padding ={{md:'10px 50px',xs:'5px 10px'}} fontSize={{ md: "36px", xs: "24x" }}>
+                          {timeLeft.minutes < 10 ? '0' + timeLeft.minutes: timeLeft.minutes}
+                        </Box>
+                        <br/>
+                        Minutes
+                      </Box>
+                      <Box component="div" display="inline" style={{marginRight:'20px'}} >
+                        <Box style={{borderColor:'rgba(255, 27, 27, 0.3)',borderRadius:'6px',borderStyle:'solid'}} padding ={{md:'10px 50px',xs:'5px 10px'}} fontSize={{ md: "36px", xs: "24x" }}>
+                          {timeLeft.seconds < 10 ? '0' + timeLeft.seconds: timeLeft.seconds}
+                        </Box>
+                        <br/>
+                        Seconds
+                      </Box>
+                    </Typography>
+                  ) : (
+                    <Typography
+                    
+                    fontSize={{ md: "24px", xs: "14x" }}
+                    px={2}
+                    py={1}
+                    color={'#febf33'}
                     >
-                    <Box component="div" display="inline" style={{marginRight:'20px'}} >
-                      <Box style={{borderColor:'rgba(255, 27, 27, 0.3)',borderRadius:'6px',borderStyle:'solid',width:'100px'}} fontSize={{ md: "36px", xs: "24x" }}>
-                        {timeLeft.day}
-                      </Box>
-                      <br/>
-                      Days
-                    </Box>
-                    <Box component="div" display="inline" style={{marginRight:'20px'}}>
-                      <Box style={{borderColor:'rgba(255, 27, 27, 0.3)',borderRadius:'6px',borderStyle:'solid',width:'100px'}} fontSize={{ md: "36px", xs: "24x" }}>
-                        {timeLeft.hours < 10 ? '0' + timeLeft.hours: timeLeft.hours}
-                      </Box>
-                      <br/>
-                      Hours
-                    </Box>
-                    <Box component="div" display="inline" style={{marginRight:'20px'}} >
-                      <Box style={{borderColor:'rgba(255, 27, 27, 0.3)',borderRadius:'6px',borderStyle:'solid',width:'100px'}} fontSize={{ md: "36px", xs: "24x" }}>
-                        {timeLeft.minutes < 10 ? '0' + timeLeft.minutes: timeLeft.minutes}
-                      </Box>
-                      <br/>
-                      Minutes
-                    </Box>
-                    <Box component="div" display="inline" style={{marginRight:'20px'}} >
-                      <Box style={{borderColor:'rgba(255, 27, 27, 0.3)',borderRadius:'6px',borderStyle:'solid',width:'100px'}} fontSize={{ md: "36px", xs: "24x" }}>
-                        {timeLeft.seconds < 10 ? '0' + timeLeft.seconds: timeLeft.seconds}
-                      </Box>
-                      <br/>
-                      Seconds
-                    </Box>
-                  </Typography>
-                ) : (
-                  <Typography
-                  
-                  fontSize={{ md: "24px", xs: "14x" }}
-                  px={2}
-                  py={1}
-                  color={'#febf33'}
-                  >
-                    Time is up 🔥
-                  </Typography>
-                )}
-                  
-              </Box>
+                      Time is up 🔥
+                    </Typography>
+                  )}
+                    
+                </Box>
               <Box display="flex" alignItems="center" justifyContent="center" mt={5}>
-                    <img
-                      src={TOAD_BANNER2}
-                      alt="back"
-                      width={width < 700 ? "100%" : "50%"}
-                    />
-                  </Box>
-              
-              </Grid>
+                <img
+                  src={TOAD_BANNER2}
+                  alt="back"
+                  width={width < 700 ? "100%" : "50%"}
+                />
+              </Box>
+            </Grid>
           </Grid>
 
         </Box>
@@ -259,7 +265,7 @@ function Banner() {
           position="relative"
           overflow="hidden"
           style={styles.boxStyle}
-          px={{ md: 5, xs: 5 }}
+          px={{ md: 5, xs: 2 }}
         >     
               
               <Box  style={{
@@ -295,11 +301,12 @@ function Banner() {
                       MoneyToad is a BNB Miner dapp on BSC, with a daily return of 12% per day
                 </Typography>
               </Box>
-              <Box mt={3} display='flex' justifyContent='center'>
-                <a href="#" target="_blank" style={{textDecoration:'none'}}>
+              <Box mt={3} display={{md:'flex',xs:'block'}} justifyContent='center'>
+                <a href={whitePaper} target="_blank"  justifyContent='center' style={{ textDecoration: "none",display:'flex',justifyContent:'center'}}>
                     <Box 
                       width="130px" 
                       textAlign="center" 
+                      textTransform="capitalize"
                       color="white"
                       fontWeight={'600'} 
                       py={'3px'} 
@@ -309,15 +316,13 @@ function Banner() {
                       borderRadius={'10px'}
                       boxShadow={'0px 3px #febf33'}
                       border={'2px solid #e58f0e'}
-                      marginRight='30px'
+                      marginBottom = {'20px'}
+                      marginRight={{md:'30px',xs:'0px'}}
                     >
-                      whitepaper
+                      Whitepaper
                     </Box>
                 </a>
-                <a href="/faq" target="_blank" style={{ textDecoration: "none" }}>
-                  {/* <Typography fontSize="16px" color="primary"  style={{marginRight:"15px",marginLeft:'15px'}}>
-                    FAQ
-                  </Typography> */}
+                <a href="/faq" target="_blank"  justifyContent='center' style={{ textDecoration: "none",display:'flex',justifyContent:'center'}}>
                   <Box 
                       width="130px" 
                       textAlign="center" 
@@ -330,43 +335,65 @@ function Banner() {
                       borderRadius={'10px'}
                       boxShadow={'0px 3px #febf33'}
                       border={'2px solid #e58f0e'}
-                      marginRight='30px'
+                      marginBottom = {'20px'}
+                      marginRight={{md:'30px',xs:'0px'}}
                     >
                       FAQ
                     </Box>
                 </a>
-                <a href="#" target="_blank" style={{textDecoration:'none'}}>
-                    <Box 
+                <a href="https://github.com/Security-Network-pro/Audit-Smart-Contract/blob/main/MoneyToad_0xd2d28013E97161cb58bfD36643cC93a3E137ec37.pdf" target="_blank"  justifyContent='center' style={{ textDecoration: "none",display:'flex',justifyContent:'center'}}>
+                  <Box 
                       width="130px" 
-                      textAlign="center"
-                      cursor={'pointer'} 
+                      textAlign="center" 
                       color="white"
                       fontWeight={'600'} 
                       py={'3px'} 
                       px={'0px'} 
+                      cursor={'pointer'}
                       backgroundColor={"#c6660d"}
                       borderRadius={'10px'}
                       boxShadow={'0px 3px #febf33'}
                       border={'2px solid #e58f0e'}
+                      marginBottom = {'20px'}
+                      marginRight={{md:'30px',xs:'0px'}}
                     >
-                      contract
+                      Audit
+                    </Box>
+                </a>
+                <a href={kyc} target="_blank"  justifyContent='center' style={{ textDecoration: "none",display:'flex',justifyContent:'center'}}>
+                  <Box 
+                      width="130px" 
+                      textAlign="center" 
+                      color="white"
+                      fontWeight={'600'} 
+                      py={'3px'} 
+                      px={'0px'} 
+                      cursor={'pointer'}
+                      backgroundColor={"#c6660d"}
+                      borderRadius={'10px'}
+                      boxShadow={'0px 3px #febf33'}
+                      border={'2px solid #e58f0e'}
+                      marginBottom = {'20px'}
+                      marginRight={{md:'30px',xs:'0px'}}
+                    >
+                      KYC
                     </Box>
                 </a>
               </Box>
-              <Box style={styles.mainContent} mt={5}>
+              <Box mt={5} display={{md:'flex',xs:'block'}} gap="20px" justifyContent='center' margin=" 50px auto 0" maxWidth="100%" alignItems='stretch'>
                  
                   <Box style={styles.leftBox}>
                     <Box style={styles.dataRow}>
                         <Box>Contract</Box>
-                        <Box style={styles.value}> {contractBalance?String(contractBalance).substring(0,6):0} BNB</Box>
+                        <Box style={styles.value}> {contractBalance != null ? String(contractBalance).substring(0,6):0} BNB</Box>
                     </Box>
                     <Box style={styles.dataRow}>
                         <Box>Wallet</Box>
-                        <Box style={styles.value}> {ballance?String(ballance).substring(0,6):0} BNB</Box>
+                        <Box style={styles.value}> {ballance != null ? String(ballance).substring(0,6):0} BNB</Box>
                     </Box>
                     <Box style={styles.dataRow}>
                         <Box>Your Toad</Box>
-                        <Box style={styles.value}> {balanceToad?String(balanceToad).substring(0,6):0} Toad</Box>
+                        <Box style={styles.value}> {balanceToad != null? String(balanceToad).substring(0,6):0} Toad</Box>
                     </Box>
                     <Typography style={styles.antWrapper}>
                         {/* <input style={styles.antInput} ></input> */}
@@ -385,7 +412,7 @@ function Banner() {
                             display="flex"
 
                           />
-                        <Typography color="#feec6c" fontSize="16px" display='flex' alignItems="center">
+                        <Typography color="#feec6c" fontSize="16px" position="absolute" right="15px" top="12px" display='flex' alignItems="center">
                             <Typography>
                               BNB
                             </Typography>
@@ -407,11 +434,11 @@ function Banner() {
                   </Box>
                   <Box style={styles.rightBox}>
                     <Box style={styles.contactInfo}>
-                        <Box style={{display:'flex',justifyContent:'spaceBetween',alignItems:'center'}}>
+                        <Box style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
                           <img src={TOAD_BANNER1}
-                            width="80%" height="80%"/>
+                              width={width < 700 ? "50%" : "50%"}/>
                         </Box>
-                        <Box style={{width:'65%'}}>
+                        <Box width={{md:'65%',xs:'100%'}}>
                           <Typography style={{
                             color:'#9221a',
                             fontSize:'25px',
@@ -467,12 +494,13 @@ function Banner() {
             </Box>
             <Box style={styles.videoWrapper}>
               <video 
-                autoPlay 
-                loop
+                 
+                 playsInline
+                  loop
+                  muted
                 src="/istockphoto-482954821-640_adpp_is.mp4"
-                playsInLine
-                style={styles.video}
-                muted
+                  ref={videoEl}
+                  style={styles.video}
               ></video>
             </Box>
             <Box
