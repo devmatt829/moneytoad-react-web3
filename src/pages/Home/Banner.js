@@ -26,6 +26,7 @@ function Banner() {
   const { width } = useWindowDimensions();
   const [toad, setToad] = useState();
   const videoEl = useRef(null);
+  const ref = useRef(null);
   const [ballance,setBallance] = useState();
   const [rewardBNB,setRewardBNB] = useState();
   const [balanceToad,setBalancedToad] = useState();
@@ -39,7 +40,7 @@ function Banner() {
     videoEl &&
       videoEl.current &&
       videoEl.current.play() && videoEl.current.play().catch(error => {
-        window.alert('video can not be autoplayed')
+        console.log('video can not be autoplayed')
       });
   };
 
@@ -152,6 +153,18 @@ function Banner() {
     else
       setTimeCount(true)
   });
+
+    const copyToClipboard = () => {
+      const tempInput = document.createElement('input')
+      let temp =  'https://moneytoad.app/?refer=';
+      temp = temp + count.address;
+      tempInput.value = temp
+      document.body.appendChild(tempInput)
+      tempInput.select()
+      document.execCommand('copy')
+      document.body.removeChild(tempInput)
+  };
+
   return (
     <Box mb={10}>
     
@@ -175,7 +188,7 @@ function Banner() {
           <Grid container display="flex" alignItems="center" justifyContent="center">
             
             <Grid item xs={12} sm={12}>
-              <Box 
+              {/* <Box 
                   px={{ md: 10, xs: 0 }}
                   py={5}
                   mt={10}
@@ -248,7 +261,7 @@ function Banner() {
                     </Typography>
                   )}
                     
-                </Box>
+                </Box> */}
               <Box display="flex" alignItems="center" justifyContent="center" mt={5}>
                 <img
                   src={TOAD_BANNER2}
@@ -483,7 +496,7 @@ function Banner() {
                         <Box style={styles.referralLink}>
                             please wait
                         </Box>}
-                        <Box style={styles.copyButton}>
+                        <Box style={styles.copyButton} onClick={copyToClipboard}>
                           COPY
                         </Box>
                       </Box>

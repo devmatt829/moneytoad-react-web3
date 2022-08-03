@@ -10,6 +10,7 @@ import { ElevateAppBar } from "./components/AppBar";
 import { HeaderBar } from './components/AppBar'
 import { motion } from "framer-motion";
 import {CounterProvider,TimeCounterProvider} from "./utils/store";
+import {Helmet} from "react-helmet";
 const Home = lazy(() => import("./pages/Home"));
 const Faq = lazy(() => import("./pages/Faq"));
 // const Login = lazy(() => import("./pages/Admin/Login"));
@@ -37,6 +38,10 @@ function App() {
     <>
       <CounterProvider>
         <TimeCounterProvider>
+        <Helmet>
+                <meta charSet="utf-8" />
+                <link rel="description" content="Money Toad Miner is a progressive ROI dapp on BSC with a daily earn of 12% and a passive income of 15% from your referrals." />
+        </Helmet>
         <Box>
           <BrowserRouter>
             <Routes>
