@@ -5,6 +5,7 @@ const contractABI = require('../contract-abi.json')
 const contractAddress = '0xd2d28013E97161cb58bfD36643cC93a3E137ec37'
 
 export const connectWallet = async () => {
+  debugger
   if (window.ethereum) {
     const chainId = 56 // 3 for ropsten, 4 for rinkeby, 1 for mainnet
     // switch to chainId

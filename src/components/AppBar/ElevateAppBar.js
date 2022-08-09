@@ -157,6 +157,14 @@ export function ElevateAppBar(props) {
                   />
                   <img src="image/kindpng_7716077.png" alt="china_flag" width="15px" height="10px"/>
                 </a>
+                <a href="https://t.me/MoneyToadMinerRU"  style={{marginRight:"15px",marginLeft:'15px'}}>
+                  <img
+                    src="/image/telegram.png"
+                    alt="boxa staking"
+                    width="27px"
+                  />
+                  <img src="image/kindpng_176249.png" alt="china_flag" width="15px" height="10px"/>
+                </a>
              </Box>
             
 

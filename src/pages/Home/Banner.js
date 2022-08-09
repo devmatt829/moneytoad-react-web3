@@ -73,7 +73,9 @@ function Banner() {
   };
   const onBuyPressed = async  () => {
     //console.log('buyclicked=', toad)
-    
+    debugger
+    if (Number(toad))
+    {
       const {success,address} = await buyToad(toad,refer);
       if (success)
         {
@@ -81,11 +83,7 @@ function Banner() {
           //notify("Buyed successfully",address);
           //createNotification("Buyed Successfully")
         }
-    else{
-      //notify("Buyed failed",address);
-      //createNotification("Buyed failed")
     }
-      //console.log('status=',status);
   }
   const onSellPressed =async () => {
     //console.log('sellclicked');
@@ -140,19 +138,19 @@ function Banner() {
     const code = urlParams.get('refer')
     setRefer(code)
   },[])
- useEffect(() => {
-    if(timeTracking)
-      setTimeout(() => {
-          let left = calculateTimeLeft()
-          if (!left)
-            setTimeTrackingStop(false)
-          else
-            setTimeLeft(left);
+//  useEffect(() => {
+//     if(timeTracking)
+//       setTimeout(() => {
+//           let left = calculateTimeLeft()
+//           if (!left)
+//             setTimeTrackingStop(false)
+//           else
+//             setTimeLeft(left);
           
-      }, 1000)
-    else
-      setTimeCount(true)
-  });
+//       }, 1000)
+//     else
+//       setTimeCount(true)
+//   });
 
     const copyToClipboard = () => {
       const tempInput = document.createElement('input')
@@ -262,11 +260,11 @@ function Banner() {
                   )}
                     
                 </Box> */}
-              <Box display="flex" alignItems="center" justifyContent="center" mt={5}>
+              <Box display="flex" alignItems="center" justifyContent="center" mt={15}>
                 <img
                   src={TOAD_BANNER2}
                   alt="back"
-                  width={width < 700 ? "100%" : "50%"}
+                  width={width < 700 ? "100%" : "30%"}
                 />
               </Box>
             </Grid>
@@ -393,7 +391,7 @@ function Banner() {
                     </Box>
                 </a>
               </Box>
-              <Box mt={5} display={{md:'flex',xs:'block'}} gap="20px" justifyContent='center' margin=" 50px auto 0" maxWidth="100%" alignItems='stretch'>
+              <Box mt={5} display={{md:'flex',xs:'block'}} gap="20px" justifyContent='center' margin=" 50px auto 0" maxWidth="100%" minWidth="50%" malignItems='stretch'>
                  
                   <Box style={styles.leftBox}>
                     <Box style={styles.dataRow}>
@@ -414,14 +412,14 @@ function Banner() {
                         
                             style={styles.antInput}
                             value={toad}
-                            type={"number"}
-                            onChange={(event) =>{
-                              const re = /^(0|[1-9]\d*)(\.\d+)?$/;
-                              if (event.target.value === '' || re.test(event.target.value)) {
-                                event.target.value < 0
-                                    ? setToad(0)
-                                    : setToad(event.target.value)}
-                            }}
+                            // onChange={(event) =>{
+                            //   const re = /^(0|[1-9]\d*)(\.\d+)?$/;
+                            //   if (event.target.value === '' || re.test(event.target.value)) {
+                            //     event.target.value < 0
+                            //         ? setToad(0)
+                            //         : setToad(event.target.value)}
+                            // }}
+                            onChange={(e)=>setToad(e.target.value)}
                             display="flex"
 
                           />
@@ -503,7 +501,7 @@ function Banner() {
                     </Box>
                   </Box>
               </Box>
-              </Box>
+            </Box>
             </Box>
             <Box style={styles.videoWrapper}>
               <video 

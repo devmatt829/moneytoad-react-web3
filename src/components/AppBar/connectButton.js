@@ -45,7 +45,7 @@ const ConnectButton = () => {
           }
       }
     return(
-        <Typography fontSize="16px" whiteSpace="nowrapp" onClick={connectWalletPressed}>{timeCount ? count.message : 'Please wait until launch'}</Typography>
+        <Typography fontSize="16px" whiteSpace="nowrapp" cursor="pointer" onClick={connectWalletPressed}>{timeCount ? count.message : 'Please wait until launch'}</Typography>
     )
 }
 export {ConnectButton}

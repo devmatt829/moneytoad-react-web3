@@ -26,6 +26,7 @@ const styles = {
       padding:'20px',
       background:'#e58f0e',
       borderRadius:'20px',
+      minWidth:"40%",
       marginBottom:'30px',
       width: {md:'36%',xs:'100%'}
     },
@@ -70,6 +71,7 @@ const styles = {
       fontSize: '24px',
       fontWeight: "600",
       lineHeight: "55px",
+      width:'100%',
       textAlign: "center",
       outline:'0',
       "&::-webkit-outer-spin-button, &::-webkit-inner-spin-button": {
@@ -138,7 +140,7 @@ const styles = {
       borderRadius: "40px",
       cursor:'pointer',
       padding: "5px 20px",
-      color: "#e58f0e",
+      color: 'rgb(64, 27, 11)',
       background:'#fbba08',
       fontSize:'13px',
       textAlign:'center',
