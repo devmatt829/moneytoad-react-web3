@@ -137,6 +137,7 @@ function Banner() {
     const urlParams = new URLSearchParams(queryString);
     const code = urlParams.get('refer')
     setRefer(code)
+    setTimeCount(true)
   },[])
 //  useEffect(() => {
 //     if(timeTracking)
