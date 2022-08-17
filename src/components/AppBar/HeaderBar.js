@@ -15,9 +15,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import useWindowDimensions from "../../hooks/useDimension";
 import { NavLink } from "react-router-dom";
-import {
-  connectWallet
-} from '../../utils/interact.js'
+
 import {useCounterStore, useTimeCounterStore} from '../../utils/store' 
 import {ConnectButton} from './connectButton.js'
 function ElevationScroll(props) {
@@ -61,19 +59,7 @@ export function HeaderBar(props) {
     setAnchorElNav(null);
   };
   const [count,setCount] = useCounterStore();
-  const connectWalletPressed = async () => {
-    let walletStatus;
-    
-    if (timeCount)
-      { walletStatus = await connectWallet(); 
-          
-        if (!count.status)
-          setCount({address:walletStatus.address,launchtime:true,message:walletStatus.message,status:walletStatus.status})
-        else{
-          setCount({message:'connect wallet',launchtime:true})
-        }
-      }
-  }
+
   useEffect(()=>{
       async function addWalletListener(){
       if (window.ethereum) {
@@ -90,10 +76,7 @@ export function HeaderBar(props) {
     }
       addWalletListener();
   },[])
-  useEffect(()=>{
-    
-    connectWalletPressed();
-  },[timeCount])
+
   const styles = {
     button: {
       userSelect: "none",

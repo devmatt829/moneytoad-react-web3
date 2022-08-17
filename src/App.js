@@ -1,7 +1,6 @@
 import "./App.css";
 import { Box } from "@mui/material";
 import Layout from "./Layout";
-import Footer from "./components/Footer";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 

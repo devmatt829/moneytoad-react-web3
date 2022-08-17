@@ -31,6 +31,8 @@ const ConnectButton = () => {
     
         connectWalletPressed();
       },[timeCount])
+    
+
     const connectWalletPressed = async () => {
         let walletStatus;
         

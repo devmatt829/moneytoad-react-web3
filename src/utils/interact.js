@@ -1,96 +1,117 @@
 
 import Web3 from "web3";
-const web3 = new Web3(window.ethereum);
+import web3Modal from "../Web3Modal";
+import VConsole from 'vconsole';
 const contractABI = require('../contract-abi.json')
 const contractAddress = '0xd2d28013E97161cb58bfD36643cC93a3E137ec37'
 
-export const connectWallet = async () => {
+let provider;
+let web3Object;
+let contract;
+let web3;
+// or init with options
+const vConsole = new VConsole({ theme: 'dark' });
+export const getCoinbase = async () => {
+  //  Get Accounts
+  const accounts = await window.web3Object.eth.getAccounts();
   debugger
-  if (window.ethereum) {
-    const chainId = 56 // 3 for ropsten, 4 for rinkeby, 1 for mainnet
-    // switch to chainId
-    let account;
-    try{
-      await window.ethereum.send('eth_requestAccounts')
-    .then(acc=>{
-      account = acc;
-    })
-    }
-    catch(err){
-      return{
-        message: 'Connect wallet',
+  return accounts.length > 0 ? accounts[0] : ""
+}
+
+export const connectWallet = async () => {
+  try{
+    provider = await web3Modal.connect();
+    web3Object = new Web3(provider);
+    window.web3Object = web3Object;
+    if (window.web3Object) {
+      const chainId = 56 // 3 for ropsten, 4 for rinkeby, 1 for mainnet
+      // switch to chainId
+      let account;
+      try{
+        await  web3Object.eth.getAccounts()
+      .then(acc=>{
+        account = acc;
+      })
+      }
+      catch(err){
+        return{
+          message: 'Connect wallet',
+          status:false
+        }
+      }
+      let useraddress = account[0];
+      let current_chainId = await  web3Object.eth.getChainId();
+      console.log('Hello world',current_chainId);
+      if (current_chainId !== chainId) {
+        console.log('chainID=',chainId)
+        try{
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: '0x38',
+            rpcUrls: ['https://bsc-dataseed.binance.org/'],
+            chainName: 'BSC Mainnet'}],
+          })
+          console.log('successfully changed')
+          return{
+
+            address: useraddress,
+            message: 'Connected: '+String(useraddress).substring(0, 6) +
+            '...' +
+            String(useraddress).substring(38),
+            status:true
+          }
+        }
+        catch(err){
+          console.log(err,'err, switch network')
+          return{
+            address:'',
+            message: 'switch network',
+            status: false
+          }
+        }
+          
+          
+      }
+      else
+      console.log('chain ID is same')
+          return {
+            address: useraddress,
+            message: 'Connected: '+String(useraddress).substring(0, 6) +
+            '...' +
+            String(useraddress).substring(38),
+            status:true
+          }
+    } 
+    else {
+      return {
+        address: '',
+        message: 'please install metamask',
         status:false
       }
     }
-    let useraddress = account.result[0];
-    let current_chainId = await web3.eth.getChainId()
-    if (current_chainId !== chainId) {
-      try{
-         await window.ethereum.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: web3.utils.toHex(chainId) }],
-        })
-        return{
-          address: useraddress,
-          message: 'Connected: '+String(useraddress).substring(0, 6) +
-          '...' +
-          String(useraddress).substring(38),
-          status:true
-        }
-      }
-      catch(err){
-        
-        return{
-          address:'',
-          message: 'switch network',
-          status: false
-        }
-      }
-        
-         
-    }
-    else
-        return {
-          address: useraddress,
-          message: 'Connected: '+String(useraddress).substring(0, 6) +
-          '...' +
-          String(useraddress).substring(38),
-          status:true
-        }
-  } 
-  else {
-    return {
-      address: '',
-      message: 'please install metamask',
-      status:false
-    }
+  }
+  catch (e) {
+       console.error(e);
+      throw new Error("User denied wallet connection!");
   }
 }
-
 
 export const buyToad = async (
   Toad,refer
 ) => {
   //load smart contract
-  window.contract = await new web3.eth.Contract(contractABI, contractAddress) //loadContract();
+  window.web3Object = web3Object;
+  let contract = await new window.web3Object.eth.Contract(contractABI, contractAddress,{from: await getCoinbase()}) //loadContract();
   const amountToSend = web3.utils.toBN(parseInt(Toad* 1e18))
   //console.log(refer)
   let txHash = 'still pending'
   if (!refer) 
-    refer = window.ethereum.selectedAddress;
+    refer = await getCoinbase();
   try{
-    await web3.eth
-    .sendTransaction({
-      from: window.ethereum.selectedAddress,
-      to: contractAddress,
+    await contract?.methods.buyEggs(refer).send({
+      from: await getCoinbase(),
       value: amountToSend,
-      data: window.contract.methods
-        .buyEggs(
-          refer
-        )
-        .encodeABI(),
     })
-
     .then(function (receipt) {
       ////console.log('state 2')
       txHash =
@@ -120,19 +141,13 @@ catch(error){
 }
 export const sellToad = async (
 ) => {
-  window.contract = await new web3.eth.Contract(contractABI, contractAddress) //loadContract();
+  let contract = await new web3Object.eth.Contract(contractABI, contractAddress,{from: await getCoinbase()}) //loadContract();
   let txHash = "pending"
   try{
-    await web3.eth
-    .sendTransaction({
-      from: window.ethereum.selectedAddress,
-      to: contractAddress,
-      data: window.contract.methods
-        .sellEggs(
-        )
-        .encodeABI(),
-    })
+    await contract?.methods.sellEggs.send({
+      from: await getCoinbase()
 
+    })
     .then(function (receipt) {
       ////console.log('state 2')
       txHash =
@@ -160,20 +175,14 @@ export const sellToad = async (
 export const compoundToad = async (
   refer
 ) => {
-  window.contract = await new web3.eth.Contract(contractABI, contractAddress) //loadContract();
+  let contract = await new web3Object.eth.Contract(contractABI, contractAddress,{from: await getCoinbase()}) //loadContract();
   if (!refer) 
-    refer = window.ethereum.selectedAddress;
+    refer = await getCoinbase();
   let txHash = "pending"
   try{
-    await web3.eth
-    .sendTransaction({
-      from: window.ethereum.selectedAddress,
-      to: contractAddress,
-      data: window.contract.methods
-        .hatchEggs(
-          refer
-        )
-        .encodeABI(),
+    await contract?.methods.hatchEggs(refer).send({
+      from: await getCoinbase()
+
     })
 
     .then(function (receipt) {
@@ -204,45 +213,50 @@ export const compoundToad = async (
 
 export const getBallance = async () => {
   //load smart contract
-  
-  window.contract = await new web3.eth.Contract(contractABI, contractAddress) //loadContract();
+  contract = await new window.web3Object.eth.Contract(contractABI, contractAddress,{from: await getCoinbase()}) //loadContract();
   var rewards;var eggs;var contractBalance;var balance;
-
-  if (window.ethereum){
+  window.web3Object = web3Object;
+  if (window.ethereum || web3Object){
     //console.log(window.ethereum.selectedAddress)
+    let address = await getCoinbase();
+    debugger
   try{
-    balance = await web3.eth.getBalance(window.ethereum.selectedAddress)
+    balance = await  new window.web3Object.eth.getBalance(await getCoinbase())
     //console.log(balance)
-    debugger
+    
   } catch(error){
-    //console.log(error)
+    console.log(error)
     balance = 0.00000000000000001 ;
-    debugger
+    
   }
 
   try {
-    contractBalance = await window.contract.methods.getBalance().call()
+    debugger
+    contractBalance = await web3Object.eth.getBalance(contractAddress)
     //console.log(contractBalance, "contractBalance")
+    debugger
+    console.log('contractBalance=',contractBalance)
     }
     catch(err){
+      console.log(err)
       contractBalance = 0.0001;
     }
     //console.log(window.ethereum.selectedAddress)
   try {
-      eggs = await window.contract.methods.getMyEggs(window.ethereum.selectedAddress).call()
+      eggs = await contract?.methods.getMyEggs(await getCoinbase()).call()
       
       if (eggs == 0)
       {
         rewards = 0;
       }
       else{
-        rewards = await window.contract.methods.beanRewards(window.ethereum.selectedAddress).call()
+        rewards =await contract?.methods.beanRewards(await getCoinbase()).call()
         
       }
       //console.log(eggs, "eggssssss")
     }
     catch(err){
-      //console.log(err)
+      console.log(err)
       
       eggs = 0.;
       rewards = 0;

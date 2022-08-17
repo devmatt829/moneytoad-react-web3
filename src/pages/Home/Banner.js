@@ -67,7 +67,7 @@ function Banner() {
     else
       return false
   };
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  // const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   const createNotification = (str) => {
           NotificationManager.info(str);
   };
