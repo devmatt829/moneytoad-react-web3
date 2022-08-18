@@ -20,7 +20,11 @@ import CoinbaseWalletSDK from '@coinbase/wallet-sdk'
       package: WalletConnectProvider , // required
       options: {
         infuraId: "a346366462c84f2c8f4a984e4bfd02e6", // required
-      }
+        rpc:{
+          56:'https://bsc-dataseed.binance.org/'
+        }
+      },
+      
     },
     coinbasewallet: {
       display: {
