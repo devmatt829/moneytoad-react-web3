@@ -34,8 +34,9 @@ export const connectWallet = async () => {
       })
       }
       catch(err){
+        console.log(err)
         return{
-          message: 'Connect wallet',
+          message: 'Connect wallet',  
           status:false
         }
       }
@@ -267,7 +268,7 @@ export const getBallance = async () => {
     success:true,
     balance: parseFloat(balance/1e18),
     reward: parseFloat(rewards/1e18),
-    eggs : parseFloat(eggs/1e3),
+    eggs : parseFloat(eggs/1e6),
     contractBalance : parseFloat(contractBalance/1e18)
   }
 }

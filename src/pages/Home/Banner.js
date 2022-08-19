@@ -397,15 +397,15 @@ function Banner() {
                   <Box style={styles.leftBox}>
                     <Box style={styles.dataRow}>
                         <Box>Contract</Box>
-                        <Box style={styles.value}> {contractBalance != null ? String(contractBalance).substring(0,6):0} BNB</Box>
+                        <Box style={styles.value}> {contractBalance != null ? parseInt(contractBalance*1e6)/1e6:0} BNB</Box>
                     </Box>
                     <Box style={styles.dataRow}>
                         <Box>Wallet</Box>
-                        <Box style={styles.value}> {ballance != null ? String(ballance).substring(0,6):0} BNB</Box>
+                        <Box style={styles.value}> {ballance != null ? parseInt(ballance*1e6)/1e6:0} BNB</Box>
                     </Box>
                     <Box style={styles.dataRow}>
                         <Box>Your Toad</Box>
-                        <Box style={styles.value}> {balanceToad != null? String(balanceToad).substring(0,6):0} Toad</Box>
+                        <Box style={styles.value}> {balanceToad != null? parseInt(parseInt(balanceToad*1e6)/1e6):0} Toad</Box>
                     </Box>
                     <Typography style={styles.antWrapper}>
                         {/* <input style={styles.antInput} ></input> */}
