@@ -10,7 +10,7 @@ let web3Object;
 let contract;
 let web3;
 // or init with options
-const vConsole = new VConsole({ theme: 'dark' });
+
 export const getCoinbase = async () => {
   //  Get Accounts
   const accounts = await window.web3Object.eth.getAccounts();
