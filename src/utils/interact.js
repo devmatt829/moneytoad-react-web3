@@ -1,7 +1,6 @@
 
 import Web3 from "web3";
 import web3Modal from "../Web3Modal";
-import VConsole from 'vconsole';
 const contractABI = require('../contract-abi.json')
 const contractAddress = '0xd2d28013E97161cb58bfD36643cC93a3E137ec37'
 
