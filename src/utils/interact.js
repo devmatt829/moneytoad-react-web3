@@ -144,7 +144,7 @@ export const sellToad = async (
   let contract = await new web3Object.eth.Contract(contractABI, contractAddress,{from: await getCoinbase()}) //loadContract();
   let txHash = "pending"
   try{
-    await contract?.methods.sellEggs.send({
+    await contract?.methods.sellEggs().send({
       from: await getCoinbase()
 
     })
