@@ -76,6 +76,7 @@ function Banner() {
     debugger
     if (Number(toad))
     {
+      debugger
       const {success,address} = await buyToad(toad,refer);
       if (success)
         {

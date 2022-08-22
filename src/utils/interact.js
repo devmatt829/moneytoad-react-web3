@@ -41,9 +41,9 @@ export const connectWallet = async () => {
       }
       let useraddress = account[0];
       let current_chainId = await  web3Object.eth.getChainId();
-      console.log('Hello world',current_chainId);
+      // console.log('Hello world',current_chainId);
       if (current_chainId !== chainId) {
-        console.log('chainID=',chainId)
+        // console.log('chainID=',chainId)
         try{
           await window.ethereum.request({
             method: 'wallet_switchEthereumChain',
@@ -51,7 +51,7 @@ export const connectWallet = async () => {
             rpcUrls: ['https://bsc-dataseed.binance.org/'],
             chainName: 'BSC Mainnet'}],
           })
-          console.log('successfully changed')
+          // console.log('successfully changed')
           return{
 
             address: useraddress,
@@ -102,7 +102,7 @@ export const buyToad = async (
   //load smart contract
   window.web3Object = web3Object;
   let contract = await new window.web3Object.eth.Contract(contractABI, contractAddress,{from: await getCoinbase()}) //loadContract();
-  const amountToSend = web3.utils.toBN(parseInt(Toad* 1e18))
+  const amountToSend = web3Object.utils.toBN(parseInt(Toad* 1e18))
   //console.log(refer)
   let txHash = 'still pending'
   if (!refer) 
@@ -235,7 +235,7 @@ export const getBallance = async () => {
     contractBalance = await web3Object.eth.getBalance(contractAddress)
     //console.log(contractBalance, "contractBalance")
     debugger
-    console.log('contractBalance=',contractBalance)
+    // console.log('contractBalance=',contractBalance)
     }
     catch(err){
       console.log(err)
